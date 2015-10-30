@@ -34,7 +34,7 @@ def get_data(data_file=DATA_FILE):
     df = insert_neighborhood(df, NEIGHBORHOOD_FILE, 'osm_id')
     df = df[df['Post'].str.contains('dengue', case=False)]
     df_volume = daily_volume(df)
-    # df_by_location = by_location(df)
+    df_by_location = by_location(df)
     # return (df, df_volume, df_by_location)
 
 # todo
@@ -44,7 +44,7 @@ def test():
     args = flask.request.args
     # (df, df_volume, df_by_location) = get_data()
     get_data()
-    return flask.render_template('embed.html', msg='hello2')
+    return flask.render_template('embed.html', msg='hello3')
 
 def plot_data():
     args = flask.request.args
