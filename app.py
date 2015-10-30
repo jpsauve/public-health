@@ -41,6 +41,8 @@ def get_data(data_file=DATA_FILE):
 # heroku, github, README, error, cleanup, tests
 @app.route("/")
 def test():
+    args = flask.request.args
+    (df, df_volume, df_by_location) = get_data()
     return flask.render_template('embed.html', msg='hello')
     
 def plot_data():
