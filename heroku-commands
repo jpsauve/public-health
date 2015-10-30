@@ -17,6 +17,6 @@ heroku apps
 heroku apps:destroy --app jpsdengue --confirm jpsdengue
 
 git add .
-git commit -m 'bokeh=0.9.3 in conda-requirements.txt'
+git commit -m 'small test 1'
 git push heroku master
 heroku ps:scale web=1
