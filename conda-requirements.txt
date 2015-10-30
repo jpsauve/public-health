@@ -1,0 +1,9 @@
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: osx-64
+_license=1.1=py27_0
+Flask=0.10.1
+scipy
+numpy
+pandas
+bokeh=0.9.3

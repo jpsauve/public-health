@@ -1,0 +1,19 @@
+# commands to deploy to heroku
+#conda list -e | sed '/appnope/d;/appscript/d;/ipython/d'>conda-requirements.txt
+heroku create --buildpack https://github.com/kennethreitz/conda-buildpack.git
+heroku config:add BUILDPACK_URL=https://github.com/kennethreitz/conda-buildpack.git
+git init
+git add .
+git commit -m 'initial commit'
+heroku login
+heroku create jpsdengue
+git push heroku master
+heroku ps:scale web=1
+# https://jpsdengue.herokuapp.com
+heroku logs
+heroku apps:destroy --app jpsdengue --confirm jpsdengue
+
+git add .
+git commit -m 'bokeh=0.9.3 in conda-requirements.txt'
+git push heroku master
+heroku ps:scale web=1
