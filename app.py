@@ -1,4 +1,13 @@
 # -*- coding: utf-8 -*-
+"""Flask/bokeh module to generate graphs for the "Dengue" problem.
+
+The module produces graphs of volume and location for Twitter posts given
+in a json file
+
+It is meant to run standalone (python app.py) or through heroku
+
+__author__      = "Jacques Sauve"
+"""
 
 import flask
 
@@ -7,7 +16,7 @@ import numpy as np
 import pandas as pd
 import json
 from datetime import date, timedelta, datetime
-from calc import load, daily_volume, by_location, insert_neighborhood
+from calc import read_json, daily_volume, by_location, insert_neighborhood
 
 from bokeh.embed import components
 from bokeh.plotting import figure
@@ -29,8 +38,14 @@ DATA_FILE = 'jp-30-days.json'
 NEIGHBORHOOD_FILE = 'jp.csv'
 
 def get_data(data_file=DATA_FILE):
+    """read_jsons data from the data_file
+    Performs a join with the neighborhood info
+    Filters posts mentioning 'dengue'
+    Produces a dataframe of volume of posts per day
+    Produces a dataframe of volume of posts per known (presumed) location of post author
+    """
     COLUMNS = ['LocationKey', 'Post', 'PostID', 'TimeStamp', '_id']
-    df = load(data_file, columns=COLUMNS)
+    df = read_json(data_file, columns=COLUMNS)
     df = insert_neighborhood(df, NEIGHBORHOOD_FILE, 'osm_id')
     df = df[df['Post'].str.contains('dengue', case=False)]
     df_volume = daily_volume(df)
@@ -38,23 +53,18 @@ def get_data(data_file=DATA_FILE):
     return (df, df_volume, df_by_location)
 
 # todo
-# heroku, github, README, error, cleanup, tests
-def test():
-    (df, df_volume, df_by_location) = get_data()
-    print df_by_location
+# cleanup, github, README, error
 
 @app.route("/")
 def plot_data():
-    args = flask.request.args
-
+    """Obtains post data and produces two graphs: 
+    volume of posts mentioning 'dengue' versus time; and
+    volume of posts versus neighborhood
+    """
     (df, df_volume, df_by_location) = get_data()
     dates = df_volume.index.map(lambda x: datetime.strptime(x, '%Y-%m-%d'))
-    # Create a line graph
-    TOOLS = "pan,wheel_zoom,box_zoom,reset,resize"
-    METRICS = ['Count']
-    numlines = len(METRICS)
-    mypalette=Spectral11[0:numlines]
 
+    TOOLS = "pan,wheel_zoom,box_zoom,reset,resize"
     fig1 = figure(tools=TOOLS, 
             title='Posts Volume',
             x_axis_label='Date',
@@ -65,8 +75,11 @@ def plot_data():
 
     MAX_NEIGHBORHOODS = 20
     data = {"y": df_by_location.values.tolist()[:MAX_NEIGHBORHOODS]}
-    fig2 = Bar(data, cat=df_by_location.index.values.tolist()[:MAX_NEIGHBORHOODS], title="Post Volume per Neighborhood",
-        xlabel='Neighborhood', ylabel='Volume of Posts')
+    fig2 = Bar(data, 
+        cat=df_by_location.index.values.tolist()[:MAX_NEIGHBORHOODS], 
+        title="Post Volume per Neighborhood",
+        xlabel='Neighborhood', 
+        ylabel='Volume of Posts')
 
     script2, div2 = components(fig2, INLINE)
     plot_resources = RESOURCES.render(
@@ -88,7 +101,6 @@ def plot_data():
 
 
 def main():
-    # test()
     app.run(debug=True)
 
 if __name__ == "__main__":

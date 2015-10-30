@@ -1,12 +1,16 @@
-#!/usr/local/bin/python
 # -*- coding: utf-8 -*-
+"""Module to load data from file and produce pandas dataframes.
+
+__author__      = "Jacques Sauve"
+"""
+
 import json
 import csv
 import numpy as np
 import pandas as pd
 from datetime import datetime
 
-def load(data_file, columns):
+def read_json(data_file, columns):
     with open(data_file) as f:
         data = json.load(f)
     df = pd.DataFrame(data, columns=columns)
@@ -35,9 +39,8 @@ def insert_neighborhood(df, filename, key):
     return df
 
 def daily_volume(df):
-    # must be a better way to do this
+    # there must be a better way to do this: need to study pandas more
     result = pd.DataFrame(df['Day'].value_counts().sort_index())
-    result.columns = ['Count']
     return result
 
 def by_location(df):
