@@ -1,16 +1,19 @@
 # commands to deploy to heroku
 #conda list -e | sed '/appnope/d;/appscript/d;/ipython/d'>conda-requirements.txt
-heroku create --buildpack https://github.com/kennethreitz/conda-buildpack.git
-heroku config:add BUILDPACK_URL=https://github.com/kennethreitz/conda-buildpack.git
 git init
 git add .
 git commit -m 'initial commit'
 heroku login
-heroku create jpsdengue
+heroku create --buildpack https://github.com/kennethreitz/conda-buildpack.git
+heroku rename jpsdengue
+heroku apps
+#heroku config:add BUILDPACK_URL=https://github.com/kennethreitz/conda-buildpack.git
 git push heroku master
 heroku ps:scale web=1
 # https://jpsdengue.herokuapp.com
+
 heroku logs
+heroku apps
 heroku apps:destroy --app jpsdengue --confirm jpsdengue
 
 git add .
