@@ -42,5 +42,5 @@ def daily_volume(df):
 
 def by_location(df):
     filter = df[df['Neighborhood'] != 'Unknown']
-    result = filter['Neighborhood'].value_counts().sort(ascending=False)
+    result = filter['Neighborhood'].value_counts()
     return result

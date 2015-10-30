@@ -40,9 +40,8 @@ def get_data(data_file=DATA_FILE):
 # todo
 # heroku, github, README, error, cleanup, tests
 def test():
-    args = flask.request.args
     (df, df_volume, df_by_location) = get_data()
-    return flask.render_template('embed.html', msg='hello4')
+    print df_by_location
 
 @app.route("/")
 def plot_data():
@@ -94,7 +93,7 @@ def plot_data():
 
 
 def main():
-    # get_data()
+    # test()
     app.run(debug=True)
 
 if __name__ == "__main__":
