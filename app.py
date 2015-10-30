@@ -39,12 +39,12 @@ def get_data(data_file=DATA_FILE):
 
 # todo
 # heroku, github, README, error, cleanup, tests
-@app.route("/")
 def test():
     args = flask.request.args
     (df, df_volume, df_by_location) = get_data()
     return flask.render_template('embed.html', msg='hello4')
 
+@app.route("/")
 def plot_data():
     args = flask.request.args
 
