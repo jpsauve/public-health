@@ -68,6 +68,7 @@ def plot_data():
     fig2 = Bar(data, cat=df_by_location.index.values.tolist()[:MAX_NEIGHBORHOODS], title="Post Volume per Neighborhood",
         xlabel='Neighborhood', ylabel='Volume of Posts')
 
+    script2, div2 = components(fig2, INLINE)
     plot_resources = RESOURCES.render(
         js_raw=INLINE.js_raw,
         css_raw=INLINE.css_raw,
@@ -75,8 +76,6 @@ def plot_data():
         css_files=INLINE.css_files,
     )
 
-    # For more details see:
-    #   http://bokeh.pydata.org/en/latest/docs/user_guide/embedding.html#components
     html = flask.render_template(
         'embed.html',
         plot_script1=script1, 
