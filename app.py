@@ -65,7 +65,7 @@ def plot_data():
     script1, div1 = components(fig1, INLINE)
 
     MAX_NEIGHBORHOODS = 20
-    # data = {"y": df_by_location.values.tolist()[:MAX_NEIGHBORHOODS]}
+    data = {"y": df_by_location.values.tolist()[:MAX_NEIGHBORHOODS]}
     # fig2 = Bar(data, cat=df_by_location.index.values.tolist()[:MAX_NEIGHBORHOODS], title="Post Volume per Neighborhood",
     #     xlabel='Neighborhood', ylabel='Volume of Posts')
     # fig2 = Bar(data, cat=['C1', 'C2', 'C3', 'D1', 'D2'], title="Bar example",
