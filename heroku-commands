@@ -17,7 +17,7 @@ heroku apps
 heroku apps:destroy --app jpsdengue --confirm jpsdengue
 
 git add .
-git commit -m 'better doc'
+git commit -m 'cleanup'
 git push heroku master
 heroku ps:scale web=1
 
