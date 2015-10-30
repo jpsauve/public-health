@@ -31,7 +31,7 @@ NEIGHBORHOOD_FILE = 'jp.csv'
 def get_data(data_file=DATA_FILE):
     COLUMNS = ['LocationKey', 'Post', 'PostID', 'TimeStamp', '_id']
     df = load(data_file, columns=COLUMNS)
-    # df = insert_neighborhood(df, NEIGHBORHOOD_FILE, 'osm_id')
+    df = insert_neighborhood(df, NEIGHBORHOOD_FILE, 'osm_id')
     # df = df[df['Post'].str.contains('dengue', case=False)]
     # df_volume = daily_volume(df)
     # df_by_location = by_location(df)
