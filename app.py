@@ -64,7 +64,7 @@ def plot_data():
     fig1.line(dates, df_volume.values.tolist(), line_width=3)
     script1, div1 = components(fig1, INLINE)
 
-    # MAX_NEIGHBORHOODS = 20
+    MAX_NEIGHBORHOODS = 20
     # data = {"y": df_by_location.values.tolist()[:MAX_NEIGHBORHOODS]}
     # fig2 = Bar(data, cat=df_by_location.index.values.tolist()[:MAX_NEIGHBORHOODS], title="Post Volume per Neighborhood",
     #     xlabel='Neighborhood', ylabel='Volume of Posts')
@@ -88,8 +88,7 @@ def plot_data():
         plot_div1=div1, 
         # plot_script2=script2, 
         # plot_div2=div2, 
-        plot_resources=plot_resources,
-        msg='test message'
+        plot_resources=plot_resources
     )
     return encode_utf8(html)
 
