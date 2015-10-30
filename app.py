@@ -31,20 +31,21 @@ NEIGHBORHOOD_FILE = 'jp.csv'
 def get_data(data_file=DATA_FILE):
     COLUMNS = ['LocationKey', 'Post', 'PostID', 'TimeStamp', '_id']
     df = load(data_file, columns=COLUMNS)
-    df = insert_neighborhood(df, NEIGHBORHOOD_FILE, 'osm_id')
-    df = df[df['Post'].str.contains('dengue', case=False)]
-    df_volume = daily_volume(df)
-    df_by_location = by_location(df)
-    return (df, df_volume, df_by_location)
+    # df = insert_neighborhood(df, NEIGHBORHOOD_FILE, 'osm_id')
+    # df = df[df['Post'].str.contains('dengue', case=False)]
+    # df_volume = daily_volume(df)
+    # df_by_location = by_location(df)
+    # return (df, df_volume, df_by_location)
 
 # todo
 # heroku, github, README, error, cleanup, tests
 @app.route("/")
 def test():
     args = flask.request.args
-    (df, df_volume, df_by_location) = get_data()
+    # (df, df_volume, df_by_location) = get_data()
+    get_data()
     return flask.render_template('embed.html', msg='hello')
-    
+
 def plot_data():
     args = flask.request.args
 
