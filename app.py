@@ -95,8 +95,7 @@ def plot_data():
 
 def main():
     # get_data()
-    app.debug = True
-    app.run()
+    app.run(debug=True)
 
 if __name__ == "__main__":
     main()
