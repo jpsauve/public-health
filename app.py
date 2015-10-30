@@ -64,15 +64,15 @@ def plot_data():
     fig1.line(dates, df_volume.values.tolist(), line_width=3)
     script1, div1 = components(fig1, INLINE)
 
-    MAX_NEIGHBORHOODS = 20
-    data = {"y": df_by_location.values.tolist()[:MAX_NEIGHBORHOODS]}
-    fig2 = Bar(data, cat=df_by_location.index.values.tolist()[:MAX_NEIGHBORHOODS], title="Post Volume per Neighborhood",
-        xlabel='Neighborhood', ylabel='Volume of Posts')
+    # MAX_NEIGHBORHOODS = 20
+    # data = {"y": df_by_location.values.tolist()[:MAX_NEIGHBORHOODS]}
+    # fig2 = Bar(data, cat=df_by_location.index.values.tolist()[:MAX_NEIGHBORHOODS], title="Post Volume per Neighborhood",
+    #     xlabel='Neighborhood', ylabel='Volume of Posts')
     # fig2 = Bar(data, cat=['C1', 'C2', 'C3', 'D1', 'D2'], title="Bar example",
     #     xlabel='categories', ylabel='values', width=400, height=400)
 
     # fig2 = Bar(df_by_location, 'Neighborhood', title="Localized Posts")
-    script2, div2 = components(fig2, INLINE)
+    # script2, div2 = components(fig2, INLINE)
     plot_resources = RESOURCES.render(
         js_raw=INLINE.js_raw,
         css_raw=INLINE.css_raw,
@@ -86,9 +86,10 @@ def plot_data():
         'embed.html',
         plot_script1=script1, 
         plot_div1=div1, 
-        plot_script2=script2, 
-        plot_div2=div2, 
-        plot_resources=plot_resources
+        # plot_script2=script2, 
+        # plot_div2=div2, 
+        plot_resources=plot_resources,
+        msg='test message'
     )
     return encode_utf8(html)
 
