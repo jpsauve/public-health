@@ -3,7 +3,7 @@
 # platform: osx-64
 _license=1.1=py27_0
 Flask=0.10.1
-scipy
-numpy
-pandas
+scipy=0.15.1=np19py27_0
+numpy=1.10.1=py27_0
+pandas=0.17.0=np110py27_0
 bokeh=0.9.3
