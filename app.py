@@ -52,8 +52,6 @@ def get_data(data_file=DATA_FILE):
     df_by_location = by_location(df)
     return (df, df_volume, df_by_location)
 
-# todo
-# cleanup, github, README
 TOOLS = "pan,wheel_zoom,box_zoom,reset,resize"
 """Default bokeh tools to show in graph
 """
